@@ -55,6 +55,7 @@ For Kovan
 - run `npm run verify LotteryNFT --network kovan`
 - run `npm run verify Lottery --network kovan`
 - run `npm run verify LotteryUpgradeProxy --network kovan`
+- verify proxy: go to [https://kovan.etherscan.io/proxyContractChecker](https://kovan.etherscan.io/proxyContractChecker) and enter `LotteryUpgradeProxy` address
 
 For Binance Testnet
 - run `truffle migrate --network binanceTestnet`
@@ -62,6 +63,7 @@ For Binance Testnet
 - run `npm run verify LotteryNFT --network binanceTestnet`
 - run `npm run verify Lottery --network binanceTestnet`
 - run `npm run verify LotteryUpgradeProxy --network binanceTestnet`
+- verify proxy: go to [https://testnet.bscscan.com/proxyContractChecker](https://testnet.bscscan.com/proxyContractChecker) and enter `LotteryUpgradeProxy` address
 
 ### Miscellaneous
 ABI Encoded Data for deploying proxy: `0x11e42065000000000000000000000000322e4612792dcdd60a50f9802c823e7b51ef1e31000000000000000000000000ddd7dfffcd69969f058322b22296ce3fe65c0e7b0000000000000000000000000000000000000000000000000de0b6b3a7640000000000000000000000000000000000000000000000000000000000000000000d000000000000000000000000a11cec4ff714c34775318544e97842344a9f3adc000000000000000000000000a11cec4ff714c34775318544e97842344a9f3adc`
