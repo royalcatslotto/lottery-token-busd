@@ -13,8 +13,8 @@ module.exports = async function (deployer, network, addresses) {
   lotteryAdmin = alice;
 
   console.log('BUSD.address', BUSD.address);
-  console.log('Lottery.address', Lottery.address);
   console.log('LotteryNFT.address', LotteryNFT.address);
+  console.log('Lottery.address', Lottery.address);
   console.log('proxyAdmin', proxyAdmin);
   console.log('lotteryOwner', lotteryOwner);
   console.log('lotteryAdmin', lotteryAdmin);
@@ -61,8 +61,7 @@ module.exports = async function (deployer, network, addresses) {
 
   console.log('abiEncodeData', abiEncodeData);
 
-  const proxy = await deployer.deploy(LotteryUpgradeProxy, Lottery.address, proxyAdmin, abiEncodeData, { from: admin, gas: '3000000' });
-  console.log('proxy', proxy);
+  await deployer.deploy(LotteryUpgradeProxy, Lottery.address, proxyAdmin, abiEncodeData, { from: admin, gas: '3000000' });
   const lotteryNft = await LotteryNFT.deployed();
   await lotteryNft.transferOwnership(LotteryUpgradeProxy.address);
 };
