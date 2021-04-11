@@ -3,6 +3,6 @@ node_modules
 .DS_Store
 build/contracts/*
 !build/contracts/BUSD.json
-!build/contracts/LotteryNFT.json.json
+!build/contracts/LotteryNFT.json
 !build/contracts/Lottery.json
 !build/contracts/LotteryUpgradeProxy.json
