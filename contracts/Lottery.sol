@@ -20,7 +20,7 @@ contract Lottery is LotteryOwnable, Initializable {
     // Allocation for first/sencond/third reward
     uint8[3] public allocation;
     // The TOKEN to buy lottery
-    IERC20 public thb;
+    IERC20 public busd;
     // The Lottery NFT for tickets
     LotteryNFT public lotteryNFT;
     // adminAddress
@@ -66,14 +66,14 @@ contract Lottery is LotteryOwnable, Initializable {
     constructor() public {}
 
     function initialize(
-        IERC20 _thb,
+        IERC20 _busd,
         LotteryNFT _lottery,
         uint256 _minPrice,
         uint8 _maxNumber,
         address _owner,
         address _adminAddress
     ) public initializer {
-        thb = _thb;
+        busd = _busd;
         lotteryNFT = _lottery;
         minPrice = _minPrice;
         maxNumber = _maxNumber;
@@ -238,7 +238,7 @@ contract Lottery is LotteryOwnable, Initializable {
             ][userNumberIndex[i]]
                 .add(_price);
         }
-        thb.safeTransferFrom(address(msg.sender), address(this), _price);
+        busd.safeTransferFrom(address(msg.sender), address(this), _price);
         emit Buy(msg.sender, tokenId);
     }
 
@@ -278,7 +278,7 @@ contract Lottery is LotteryOwnable, Initializable {
                 ] = userBuyAmountSum[issueIndex][numberIndexKey[k]].add(_price);
             }
         }
-        thb.safeTransferFrom(address(msg.sender), address(this), totalPrice);
+        busd.safeTransferFrom(address(msg.sender), address(this), totalPrice);
         emit MultiBuy(msg.sender, totalPrice);
     }
 
@@ -288,7 +288,7 @@ contract Lottery is LotteryOwnable, Initializable {
         uint256 reward = getRewardView(_tokenId);
         lotteryNFT.claimReward(_tokenId);
         if (reward > 0) {
-            thb.safeTransfer(address(msg.sender), reward);
+            busd.safeTransfer(address(msg.sender), reward);
         }
         emit Claim(msg.sender, _tokenId, reward);
     }
@@ -308,7 +308,7 @@ contract Lottery is LotteryOwnable, Initializable {
         }
         lotteryNFT.multiClaimReward(_tickets);
         if (totalReward > 0) {
-            thb.safeTransfer(address(msg.sender), totalReward);
+            busd.safeTransfer(address(msg.sender), totalReward);
         }
         emit MultiClaim(msg.sender, totalReward);
     }
@@ -570,7 +570,7 @@ contract Lottery is LotteryOwnable, Initializable {
 
     // Withdraw without caring about rewards. EMERGENCY ONLY.
     function adminWithdraw(uint256 _amount) public onlyAdmin {
-        thb.safeTransfer(address(msg.sender), _amount);
+        busd.safeTransfer(address(msg.sender), _amount);
         emit DevWithdraw(msg.sender, _amount);
     }
 
