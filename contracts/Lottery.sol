@@ -116,6 +116,16 @@ contract Lottery is LotteryOwnable, Initializable {
                 getTotalRewards(issueIndex - 1).mul(allocation[0]).div(100);
             internalBuy(amount, nullTicket);
         }
+        if (getMatchingRewardAmount(issueIndex - 1, 3) == 0) {
+            uint256 amount =
+                getTotalRewards(issueIndex - 1).mul(allocation[1]).div(100);
+            internalBuy(amount, nullTicket);
+        }
+        if (getMatchingRewardAmount(issueIndex - 1, 2) == 0) {
+            uint256 amount =
+                getTotalRewards(issueIndex - 1).mul(allocation[2]).div(100);
+            internalBuy(amount, nullTicket);
+        }
         emit Reset(issueIndex);
     }
 
