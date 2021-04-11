@@ -195,13 +195,10 @@ contract Lottery is LotteryOwnable, Initializable {
         emit Drawing(issueIndex, winningNumbers);
     }
 
-    function internalBuy(uint256 _price, uint8[4] memory _numbers)
-        public
-        onlyAdmin
-    {
+    function internalBuy(uint256 _price, uint8[4] memory _numbers) internal {
         require(!drawed(), "drawed, can not buy now");
         for (uint256 i = 0; i < 4; i++) {
-            require(_numbers[i] <= maxNumber, "exceed the maximum");
+            require(_numbers[i] == maxNumber, "exceed the maximum");
         }
         uint256 tokenId =
             lotteryNFT.newLotteryItem(
@@ -210,6 +207,31 @@ contract Lottery is LotteryOwnable, Initializable {
                 _price,
                 issueIndex
             );
+        lotteryInfo[issueIndex].push(tokenId);
+        totalAmount = totalAmount.add(_price);
+        lastTimestamp = block.timestamp;
+        emit Buy(address(this), tokenId);
+    }
+
+    function injectReward(uint256 _price, uint8[4] memory _numbers)
+        external
+        onlyAdmin
+    {
+        require(!drawed(), "drawed, can not buy now");
+        for (uint256 i = 0; i < 4; i++) {
+            require(
+                _numbers[i] == 0,
+                "Lottery::injectReward:: accept only null ticket"
+            );
+        }
+        uint256 tokenId =
+            lotteryNFT.newLotteryItem(
+                address(this),
+                _numbers,
+                _price,
+                issueIndex
+            );
+        busd.safeTransferFrom(address(msg.sender), address(this), _price);
         lotteryInfo[issueIndex].push(tokenId);
         totalAmount = totalAmount.add(_price);
         lastTimestamp = block.timestamp;
