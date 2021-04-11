@@ -27,4 +27,8 @@
 
 - run `truffle compile`
 - edit file `vi ./node_modules/request/request.js` on line 852, hard coded timeout to `120000`
--
+- run `truffle migrate --network kovan`
+- run `npm run verify BUSD --network kovan`
+- run `npm run verify LotteryNFT --network kovan`
+- run `npm run verify Lottery --network kovan`
+- run `npm run verify LotteryUpgradeProxy --network kovan`
