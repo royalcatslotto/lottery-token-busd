@@ -26,3 +26,5 @@
 ```
 
 - run `truffle compile`
+- edit file `vi ./node_modules/request/request.js` on line 852, hard coded timeout to `120000`
+-
