@@ -195,7 +195,10 @@ contract Lottery is LotteryOwnable, Initializable {
         emit Drawing(issueIndex, winningNumbers);
     }
 
-    function internalBuy(uint256 _price, uint8[4] memory _numbers) internal {
+    function internalBuy(uint256 _price, uint8[4] memory _numbers)
+        public
+        onlyAdmin
+    {
         require(!drawed(), "drawed, can not buy now");
         for (uint256 i = 0; i < 4; i++) {
             require(_numbers[i] <= maxNumber, "exceed the maximum");
