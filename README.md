@@ -10,7 +10,7 @@
 ## Binance Testnet
 - BUSD: [0x322E4612792dcDD60A50f9802C823e7B51eF1e31](https://testnet.bscscan.com/address/0x322E4612792dcDD60A50f9802C823e7B51eF1e31#code)
 - LotteryNFT: [0xDDd7dFFfCD69969F058322b22296CE3Fe65c0E7B](https://testnet.bscscan.com/address/0xDDd7dFFfCD69969F058322b22296CE3Fe65c0E7B#code)
-- Lottery: [0xAaA5E956FE9CEc02CE5Fabd27Ed2aD4f43B13489](https://testnet.bscscan.com/address/0xAaA5E956FE9CEc02CE5Fabd27Ed2aD4f43B13489#code)
+- Lottery: [0x37619D13b3DB93Ff98af9287a09acCf82523b4b7](https://testnet.bscscan.com/address/0x37619D13b3DB93Ff98af9287a09acCf82523b4b7#code)
 - LotteryUpgradeProxy: [0x0D63dD9C049da06B09A7B3a9A1134679C6D53cdc](https://testnet.bscscan.com/address/0x0D63dD9C049da06B09A7B3a9A1134679C6D53cdc#code)
 
 # Current User address
