@@ -21,15 +21,15 @@
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 const Web3 = require('web3');
 const fs = require('fs');
-const { infuraProjectId, privateKey, etherApiKey, bscApiKey } = JSON.parse(fs.readFileSync('.secret').toString().trim());
+const { infuraProjectId, privateKeys, etherApiKey, bscApiKey } = JSON.parse(fs.readFileSync('.secret').toString().trim());
 
 const kovanProvider = new HDWalletProvider({
-  privateKeys: privateKey,
+  privateKeys: privateKeys,
   providerOrUrl: `https://kovan.infura.io/v3/${infuraProjectId}`
 });
 
 const binanceProvider = new HDWalletProvider({
-  privateKeys: privateKey,
+  privateKeys: privateKeys,
   providerOrUrl: `https://data-seed-prebsc-1-s1.binance.org:8545`
 });
 

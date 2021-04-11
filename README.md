@@ -29,13 +29,13 @@ The BUSD Token has minted and transfer to Admin address (1000B BUSD)
 ```
 {
     "infuraProjectId": "",
-    "privateKey": [
+    "privateKeys": [
         "",
         "",
         "",
         ""
         ],
-    "privateKeyGanache": [
+    "privateKeysGanache": [
         "",
         "",
         "",
