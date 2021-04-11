@@ -22,7 +22,8 @@
     "migrate": "truffle migrate --network development --reset",
     "compile": "truffle compile --network development",
     "test": "rm -rf contracts/flattened/*.sol && truffle test",
-    "flatten": "truffle-flattener contracts/Lottery.sol > contracts/flattened/Lottery.sol"
+    "flatten": "truffle-flattener contracts/Lottery.sol > flattened/Lottery.sol",
+    "flatten2": "truffle-flattener contracts/LotteryUpgradeProxy.sol > flattened/LotteryUpgradeProxy.sol"
   },
   "dependencies": {
     "@openzeppelin/contracts": "^3.2.0",
