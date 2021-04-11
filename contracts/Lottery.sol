@@ -156,7 +156,7 @@ contract Lottery is LotteryOwnable, Initializable {
 
         // 2
         _structHash = keccak256(
-            abi.encode(_blockhash, totalAmount, gasLeft, _externalRandomNumber)
+            abi.encode(totalAmount, _blockhash, gasLeft, _externalRandomNumber)
         );
         _randomNumber = uint256(_structHash);
         assembly {
