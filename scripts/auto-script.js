@@ -1,11 +1,12 @@
-const lotteryAbi = require('./lottery.json');
+const Lottery = require('../build/contracts/Lottery.json');
 const Web3 = require('web3');
 const fs = require('fs');
-const { alicePrivKey, bobPrivKey } = JSON.parse(fs.readFileSync('../.secret').toString().trim());
-let { infuraProjectId, privateKey, privateKeyGanache } = JSON.parse(fs.readFileSync('../.secret').toString().trim());
+const { privateKeys } = JSON.parse(fs.readFileSync('../.secret').toString().trim());
 
-const fromAddress = '0xa11cec4fF714C34775318544e97842344A9F3aDc'; // LotteryAdmin
-const toAddress = '0x7c91f0d2F81d8518e6aDDeB93dE23A7cbD99F0D1'; // LotteryUpgradeProxy
+const [admin, alice, bob] = privateKeys;
+
+const fromAddress = '0xad1F66Acea98733D63cd8FC522118e4014Cb3F79'; // LotteryAdmin
+const toAddress = '0x0D63dD9C049da06B09A7B3a9A1134679C6D53cdc'; // LotteryUpgradeProxy
 
 const web3 = new Web3(
   new Web3.providers.HttpProvider(
@@ -13,13 +14,18 @@ const web3 = new Web3(
   )
 );
 
-const lottery = new web3.eth.Contract(lotteryAbi, toAddress);
+console.log('Lottery.abi', Lottery.abi);
 
-const enterDrawing = async (alicePrivKey) => {
+const lottery = new web3.eth.Contract(Lottery.abi, toAddress);
+
+console.log('lottery', lottery);
+
+
+const enterDrawing = async (privateKey) => {
   const nonce = await web3.eth.getTransactionCount(fromAddress);
   const gasPriceWei = await web3.eth.getGasPrice();
   const data = lottery.methods.enterDrawingPhase().encodeABI();
-  // console.log('alicePrivKey', alicePrivKey);
+  // console.log('privateKey', privateKey);
   const signedTx = await web3.eth.accounts.signTransaction({
     to: toAddress,
     gas: 2000000,
@@ -27,13 +33,13 @@ const enterDrawing = async (alicePrivKey) => {
     gasPrice: gasPriceWei,
     nonce: nonce,
     chainId: 97,
-  }, alicePrivKey);
+  }, privateKey);
 
   await web3.eth.sendSignedTransaction(signedTx.rawTransaction || signedTx.rawTransaction);
 
 };
 
-const drawing = async (alicePrivKey) => {
+const drawing = async (privateKey) => {
   const nonce = await web3.eth.getTransactionCount(fromAddress);
   const gasPriceWei = await web3.eth.getGasPrice();
   const randomNumber = Math.floor((Math.random() * 10) + 1);
@@ -45,12 +51,12 @@ const drawing = async (alicePrivKey) => {
     gasPrice: gasPriceWei,
     nonce: nonce,
     chainId: 97,
-  }, alicePrivKey);
+  }, privateKey);
 
   await web3.eth.sendSignedTransaction(signedTx.rawTransaction || signedTx.rawTransaction);
 };
 
-const reset = async (alicePrivKey) => {
+const reset = async (privateKey) => {
   const nonce = await web3.eth.getTransactionCount(fromAddress);
   const gasPriceWei = await web3.eth.getGasPrice();
   const signedTx = await web3.eth.accounts.signTransaction({
@@ -60,7 +66,7 @@ const reset = async (alicePrivKey) => {
     gasPrice: gasPriceWei,
     nonce: nonce,
     chainId: 97,
-  }, alicePrivKey);
+  }, privateKey);
   await web3.eth.sendSignedTransaction(signedTx.rawTransaction || signedTx.rawTransaction);
 };
 
