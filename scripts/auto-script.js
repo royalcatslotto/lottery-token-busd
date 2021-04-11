@@ -2,7 +2,7 @@ const Lottery = require('../build/contracts/Lottery.json');
 const Web3 = require('web3');
 const fs = require('fs');
 const { privateKeys } = JSON.parse(fs.readFileSync('../.secret').toString().trim());
-
+const BN = Web3.utils.BN;
 const [_, alice] = privateKeys;
 
 const contractAddress = '0x0D63dD9C049da06B09A7B3a9A1134679C6D53cdc'; // LotteryUpgradeProxy
@@ -52,7 +52,8 @@ const drawing = async (privateKey) => {
   const address = getUserAddress(privateKey);
   const nonce = await web3.eth.getTransactionCount(address);
   const gasPriceWei = await web3.eth.getGasPrice();
-  const randomNumber = Math.floor((Math.random() * 10) + 1);
+  const randomHex = Web3.utils.randomHex(32).substr(2);
+  const randomNumber = new BN(randomHex, 16).toString();
   const data = LotteryContract.methods.drawing(randomNumber).encodeABI();
   const signedTx = await web3.eth.accounts.signTransaction({
     to: contractAddress,
