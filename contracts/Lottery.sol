@@ -18,7 +18,7 @@ contract Lottery is LotteryOwnable, Initializable {
 
     uint8 constant keyLengthForEachBuy = 11;
     // Allocation for first/sencond/third reward
-    uint8[3] public allocation;
+    uint8[4] public allocation;
     // The TOKEN to buy lottery
     IERC20 public busd;
     // The Lottery NFT for tickets
@@ -79,11 +79,13 @@ contract Lottery is LotteryOwnable, Initializable {
         maxNumber = _maxNumber;
         adminAddress = _adminAddress;
         lastTimestamp = block.timestamp;
-        allocation = [60, 25, 15];
+        allocation = [50, 30, 10, 10];
         initOwner(_owner);
+        devAddress = _adminAddress;
     }
 
     uint8[4] private nullTicket = [0, 0, 0, 0];
+    address public devAddress;
 
     modifier onlyAdmin() {
         require(
@@ -117,21 +119,27 @@ contract Lottery is LotteryOwnable, Initializable {
         winningNumbers[3] = 0;
         drawingPhase = false;
         issueIndex = issueIndex + 1;
+        // first prize
         if (getMatchingRewardAmount(issueIndex - 1, 4) == 0) {
             uint256 amount =
                 getTotalRewards(issueIndex - 1).mul(allocation[0]).div(100);
             internalBuy(amount, nullTicket);
         }
+        // second prize
         if (getMatchingRewardAmount(issueIndex - 1, 3) == 0) {
             uint256 amount =
                 getTotalRewards(issueIndex - 1).mul(allocation[1]).div(100);
             internalBuy(amount, nullTicket);
         }
+        // third prize
         if (getMatchingRewardAmount(issueIndex - 1, 2) == 0) {
             uint256 amount =
                 getTotalRewards(issueIndex - 1).mul(allocation[2]).div(100);
             internalBuy(amount, nullTicket);
         }
+        uint256 amount =
+            getTotalRewards(issueIndex - 1).mul(allocation[3]).div(100);
+        busd.safeTransferFrom(address(this), devAddress, amount);
         emit Reset(issueIndex);
     }
 
@@ -615,7 +623,7 @@ contract Lottery is LotteryOwnable, Initializable {
             uint256 amount = lotteryNFT.getLotteryAmount(_tokenId);
             uint256 poolAmount =
                 getTotalRewards(_issueIndex)
-                    .mul(allocation[4 - matchingNumber])
+                    .mul(allocation[3 - matchingNumber])
                     .div(100);
             reward = amount
                 .mul(1e12)
@@ -650,12 +658,17 @@ contract Lottery is LotteryOwnable, Initializable {
     function setAllocation(
         uint8 _allcation1,
         uint8 _allcation2,
-        uint8 _allcation3
+        uint8 _allcation3,
+        uint8 _allcation4
     ) external onlyAdmin {
         require(
-            _allcation1 + _allcation2 + _allcation3 <= 100,
+            _allcation1 + _allcation2 + _allcation3 + _allcation4 <= 100,
             "Lottery::setAllocation:: exceed 100"
         );
-        allocation = [_allcation1, _allcation2, _allcation3];
+        allocation = [_allcation1, _allcation2, _allcation3, _allcation4];
+    }
+
+    function setDevAddress(address _newAddress) external onlyAdmin {
+        devAddress = _newAddress;
     }
 }
