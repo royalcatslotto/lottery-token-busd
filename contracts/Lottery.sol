@@ -139,7 +139,7 @@ contract Lottery is LotteryOwnable, Initializable {
         }
         uint256 amount =
             getTotalRewards(issueIndex - 1).mul(allocation[3]).div(100);
-        busd.safeTransferFrom(address(this), devAddress, amount);
+        busd.transfer(devAddress, amount);
         emit Reset(issueIndex);
     }
 
