@@ -1,10 +1,13 @@
-const Lottery = require('../build/contracts/Lottery.json');
-const Web3 = require('web3');
+// Third-party
 const fs = require('fs');
+const Web3 = require('web3');
+const schedule = require('node-schedule');
+
+const Lottery = require('../build/contracts/Lottery.json');
 const { privateKeys } = JSON.parse(fs.readFileSync('../.secret').toString().trim());
+
 const BN = Web3.utils.BN;
 const [_, alice] = privateKeys;
-
 const contractAddress = '0x0D63dD9C049da06B09A7B3a9A1134679C6D53cdc'; // LotteryUpgradeProxy
 
 require('console-stamp')(console, {
@@ -118,29 +121,51 @@ function getUserAddress(privateKey) {
   }
 }
 
-async function main() {
-  while (1) {
-    await sleep(10000);
-    const time = Date.parse(new Date()) / 1000;
-    if ((time - 240) % 300 < 18) { // draw every 5 minutes
-      try {
-        await reset(alice); // reset @ 17:14:02, 17:19:01, 17:24:01, 17:29:02
-      }
-      catch (err) {
-        console.error(err);
-      }
-    }
+const DRAWING_SCHEDULE = [14, 20] // run every 14.00 pm, 20.00 pm (UTC time)
+const rule = new schedule.RecurrenceRule();
+rule.hour = DRAWING_SCHEDULE;
+rule.tz = 'Etc/UTC';
 
-    else if ((time - 180) % 300 < 18) {
-      try {
-        await enterDrawing(alice); // 17:18:09, 17:23.08, 17:28:09
-        await drawing(alice); // 17.18.21, 17:23:21, 18:28:22
-      }
-      catch (err) {
-        console.error(err);
-      }
+async function main() {
+  const job = schedule.scheduleJob(rule, () => {
+    const datetime = new Date().toISOString()
+    console.log(`Scheduler running: ${datetime}`)
+
+    // [TODO] 
+    //  1. handler error when state is drawed
+    //  2. notify Slack/Line/Telegram when error
+    try {
+      await enterDrawing(alice);
+      await drawing(alice);
     }
-  }
+    catch (err) {
+      // await reset(alice); // reset
+      console.error(err);
+    }
+  });
+
+  // while (1) {
+  //   await sleep(10000);
+  //   const time = Date.parse(new Date()) / 1000;
+  //   if ((time - 240) % 300 < 18) { // draw every 5 minutes
+  //     try {
+  //       await reset(alice); // reset @ 17:14:02, 17:19:01, 17:24:01, 17:29:02
+  //     }
+  //     catch (err) {
+  //       console.error(err);
+  //     }
+  //   }
+
+  //   else if ((time - 180) % 300 < 18) {
+  //     try {
+  //       await enterDrawing(alice); // 17:18:09, 17:23.08, 17:28:09
+  //       await drawing(alice); // 17.18.21, 17:23:21, 18:28:22
+  //     }
+  //     catch (err) {
+  //       console.error(err);
+  //     }
+  //   }
+  // }
 }
 
 main();
