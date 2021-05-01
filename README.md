@@ -19,10 +19,15 @@
 - Lottery: [0xfCC92421f5f59f1473657584E63bBeaf405cd8D3](https://bscscan.com/address/0xfCC92421f5f59f1473657584E63bBeaf405cd8D3#code)
 - LotteryUpgradeProxy: [0x9236020Ea390A8822d8E55d563CB8A7E2B730e60](https://bscscan.com/address/0x9236020Ea390A8822d8E55d563CB8A7E2B730e60#code)
 
-# Current User address
+# Current User address (testnet)
 - Proxy admin: `0xad1F66Acea98733D63cd8FC522118e4014Cb3F79`
 - Lottery owner: `0xa11cec4fF714C34775318544e97842344A9F3aDc`
 - Lottery admin: `0xa11cec4fF714C34775318544e97842344A9F3aDc`
+
+# Current User address (mainnet)
+- Proxy admin: `0xca0272Aaa436E53a6Cc755454812d5A802bBFCE6`
+- Lottery owner: `0xca1cca8f5637c9566d8C719C899440A88AF7D874`
+- Lottery admin: `0xca1cca8f5637c9566d8C719C899440A88AF7D874`
 
 The BUSD Token has minted and transfer to Admin address (1000B BUSD)
 
