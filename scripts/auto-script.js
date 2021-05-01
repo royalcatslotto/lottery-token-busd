@@ -6,7 +6,7 @@ const schedule = require('node-schedule');
 const Lottery = require('../build/contracts/Lottery.json');
 const { privateKeys } = JSON.parse(fs.readFileSync('../.secret').toString().trim());
 const { mainnetPrivateKeys } = JSON.parse(fs.readFileSync('../.secret').toString().trim());
-
+const CHAIN_ID = 56; // mainnet
 
 const BN = Web3.utils.BN;
 const [_, alice] = mainnetPrivateKeys;
@@ -50,7 +50,7 @@ const enterDrawing = async (privateKey) => {
     data: data,
     gasPrice: gasPriceWei,
     nonce: nonce,
-    chainId: 97,
+    chainId: CHAIN_ID,
   }, privateKey);
 
   const result = await web3.eth.sendSignedTransaction(signedTx.rawTransaction);
@@ -71,7 +71,7 @@ const drawing = async (privateKey) => {
     data: data,
     gasPrice: gasPriceWei,
     nonce: nonce,
-    chainId: 97,
+    chainId: CHAIN_ID,
   }, privateKey);
 
   const result = await web3.eth.sendSignedTransaction(signedTx.rawTransaction);
@@ -109,7 +109,7 @@ const reset = async (privateKey) => {
     data: data,
     gasPrice: gasPriceWei,
     nonce: nonce,
-    chainId: 97,
+    chainId: CHAIN_ID,
   }, privateKey);
 
   const result = await web3.eth.sendSignedTransaction(signedTx.rawTransaction);
