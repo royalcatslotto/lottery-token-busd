@@ -1,5 +1,9 @@
 const LotteryNFT = artifacts.require('LotteryNFT');
-const BUSD = artifacts.require('BUSD');
+//const BUSD = artifacts.require('BUSD'); // BUSD Testnet
+const BUSD = {
+  address: "0xe9e7cea3dedca5984780bafc599bd69add087d56"
+} // BUSD Mainnet
+
 const Lottery = artifacts.require('Lottery');
 const LotteryUpgradeProxy = artifacts.require('LotteryUpgradeProxy');
 const Web3 = require('web3');
@@ -12,6 +16,8 @@ module.exports = async function (deployer, network, addresses) {
   lotteryOwner = alice;
   lotteryAdmin = alice;
 
+  //BUSD.address = "";
+  //console.log('BUSD.address', BUSD.address);
   console.log('BUSD.address', BUSD.address);
   console.log('LotteryNFT.address', LotteryNFT.address);
   console.log('Lottery.address', Lottery.address);

@@ -5,10 +5,12 @@ const schedule = require('node-schedule');
 
 const Lottery = require('../build/contracts/Lottery.json');
 const { privateKeys } = JSON.parse(fs.readFileSync('../.secret').toString().trim());
+const { mainnetPrivateKeys } = JSON.parse(fs.readFileSync('../.secret').toString().trim());
+const CHAIN_ID = 56; // mainnet
 
 const BN = Web3.utils.BN;
-const [_, alice] = privateKeys;
-const contractAddress = '0x0D63dD9C049da06B09A7B3a9A1134679C6D53cdc'; // LotteryUpgradeProxy
+const [_, alice] = mainnetPrivateKeys;
+const contractAddress = ''; // LotteryUpgradeProxy
 
 require('console-stamp')(console, {
   pattern: 'dd/mm/yyyy HH:MM:ss.l',
@@ -18,9 +20,14 @@ require('console-stamp')(console, {
   }
 });
 
+// const web3 = new Web3(
+//   new Web3.providers.HttpProvider(
+//     'https://data-seed-prebsc-1-s1.binance.org:8545'
+//   )
+// );
 const web3 = new Web3(
   new Web3.providers.HttpProvider(
-    'https://data-seed-prebsc-1-s1.binance.org:8545'
+    'https://bsc-dataseed.binance.org'
   )
 );
 
@@ -43,7 +50,7 @@ const enterDrawing = async (privateKey) => {
     data: data,
     gasPrice: gasPriceWei,
     nonce: nonce,
-    chainId: 97,
+    chainId: CHAIN_ID,
   }, privateKey);
 
   const result = await web3.eth.sendSignedTransaction(signedTx.rawTransaction);
@@ -64,7 +71,7 @@ const drawing = async (privateKey) => {
     data: data,
     gasPrice: gasPriceWei,
     nonce: nonce,
-    chainId: 97,
+    chainId: CHAIN_ID,
   }, privateKey);
 
   const result = await web3.eth.sendSignedTransaction(signedTx.rawTransaction);
@@ -102,7 +109,7 @@ const reset = async (privateKey) => {
     data: data,
     gasPrice: gasPriceWei,
     nonce: nonce,
-    chainId: 97,
+    chainId: CHAIN_ID,
   }, privateKey);
 
   const result = await web3.eth.sendSignedTransaction(signedTx.rawTransaction);
@@ -126,7 +133,7 @@ rule.hour = 2; // run every 2.00 am (UTC time)
 rule.tz = 'Etc/UTC';
 
 async function main() {
-  const job = schedule.scheduleJob(rule, () => {
+  const job = schedule.scheduleJob(rule, async () => {
     const datetime = new Date().toISOString()
     console.log(`Scheduler running: ${datetime}`)
 
@@ -144,7 +151,9 @@ async function main() {
   });
 
   // while (1) {
+  //   console.log("Initializing...");
   //   await sleep(10000);
+  //   console.log("Started counting...");
   //   const time = Date.parse(new Date()) / 1000;
   //   if ((time - 240) % 300 < 18) { // draw every 5 minutes
   //     try {
