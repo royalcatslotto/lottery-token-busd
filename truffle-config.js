@@ -67,7 +67,7 @@ module.exports = {
       provider: () => binanceMainnetProvider,
       network_id: '56',
       gas: 5500000,
-      gasPrice: Web3.utils.toWei(5, 'gwei'),
+      gasPrice: Web3.utils.toWei('5', 'gwei'),
       skipDryRun: true,
     },
     // Useful for testing. The `development` name is special - truffle uses it by default
