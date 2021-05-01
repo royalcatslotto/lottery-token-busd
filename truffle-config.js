@@ -21,7 +21,7 @@
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 const Web3 = require('web3');
 const fs = require('fs');
-const { infuraProjectId, privateKeys, etherApiKey, bscApiKey } = JSON.parse(fs.readFileSync('.secret').toString().trim());
+const { infuraProjectId, mainnetPrivateKets, privateKeys, etherApiKey, bscApiKey } = JSON.parse(fs.readFileSync('.secret').toString().trim());
 
 const kovanProvider = new HDWalletProvider({
   privateKeys: privateKeys,
@@ -31,6 +31,11 @@ const kovanProvider = new HDWalletProvider({
 const binanceProvider = new HDWalletProvider({
   privateKeys: privateKeys,
   providerOrUrl: `https://data-seed-prebsc-1-s1.binance.org:8545`
+});
+
+const binanceMainnetProvider = new HDWalletProvider({
+  privateKeys: mainnetPrivateKets,
+  providerOrUrl: `https://bsc-dataseed.binance.org`
 });
 
 module.exports = {
@@ -56,6 +61,13 @@ module.exports = {
       network_id: '97',
       gas: 5500000,
       gasPrice: Web3.utils.toWei('10', 'gwei'),
+      skipDryRun: true,
+    },
+    binanceMainnet: {
+      provider: () => binanceMainnetProvider,
+      network_id: '56',
+      gas: 5500000,
+      gasPrice: Web3.utils.toWei(5, 'gwei'),
       skipDryRun: true,
     },
     // Useful for testing. The `development` name is special - truffle uses it by default

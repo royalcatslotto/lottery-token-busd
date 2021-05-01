@@ -5,9 +5,11 @@ const schedule = require('node-schedule');
 
 const Lottery = require('../build/contracts/Lottery.json');
 const { privateKeys } = JSON.parse(fs.readFileSync('../.secret').toString().trim());
+const { mainnetPrivateKeys } = JSON.parse(fs.readFileSync('../.secret').toString().trim());
+
 
 const BN = Web3.utils.BN;
-const [_, alice] = privateKeys;
+const [_, alice] = mainnetPrivateKeys;
 const contractAddress = '0x0D63dD9C049da06B09A7B3a9A1134679C6D53cdc'; // LotteryUpgradeProxy
 
 require('console-stamp')(console, {
@@ -18,9 +20,14 @@ require('console-stamp')(console, {
   }
 });
 
+// const web3 = new Web3(
+//   new Web3.providers.HttpProvider(
+//     'https://data-seed-prebsc-1-s1.binance.org:8545'
+//   )
+// );
 const web3 = new Web3(
   new Web3.providers.HttpProvider(
-    'https://data-seed-prebsc-1-s1.binance.org:8545'
+    'https://bsc-dataseed.binance.org'
   )
 );
 
@@ -145,7 +152,9 @@ async function main() {
   });
 
   // while (1) {
+  //   console.log("Initializing...");
   //   await sleep(10000);
+  //   console.log("Started counting...");
   //   const time = Date.parse(new Date()) / 1000;
   //   if ((time - 240) % 300 < 18) { // draw every 5 minutes
   //     try {

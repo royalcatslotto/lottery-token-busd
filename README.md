@@ -13,6 +13,12 @@
 - Lottery: [0xFC83a3481eCEd54c6B2Fb88a01F1159ffda41Efe](https://testnet.bscscan.com/address/0xFC83a3481eCEd54c6B2Fb88a01F1159ffda41Efe#code)
 - LotteryUpgradeProxy: [0x0D63dD9C049da06B09A7B3a9A1134679C6D53cdc](https://testnet.bscscan.com/address/0x0D63dD9C049da06B09A7B3a9A1134679C6D53cdc#code)
 
+## Binance Mainnet
+- BUSD: [0xe9e7cea3dedca5984780bafc599bd69add087d56](https://bscscan.com/address/0xe9e7cea3dedca5984780bafc599bd69add087d56#code)
+- LotteryNFT: [](https://bscscan.com/address/#code)
+- Lottery: [](https://bscscan.com/address/#code)
+- LotteryUpgradeProxy: [](https://bscscan.com/address/#code)
+
 # Current User address
 - Proxy admin: `0xad1F66Acea98733D63cd8FC522118e4014Cb3F79`
 - Lottery owner: `0xa11cec4fF714C34775318544e97842344A9F3aDc`
