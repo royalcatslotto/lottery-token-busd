@@ -1,0 +1,131 @@
+truffle migrate --network binanceMainnet
+
+Compiling your contracts...
+===========================
+> Everything is up to date, there is nothing to compile.
+
+
+
+Starting migrations...
+======================
+> Network name:    'binanceMainnet'
+> Network id:      56
+> Block gas limit: 39971967 (0x261ec7f)
+
+
+1_initial_migration.js
+======================
+
+   Deploying 'Migrations'
+   ----------------------
+   > transaction hash:    0xab8948ed5beeff66e0efc86331d667627c85ed4a97cd2761d143070da475d3f7
+   > Blocks: 3            Seconds: 9
+   > contract address:    0x4CD50a81D5eEcD205D33b832EcCA6F757dec5C3b
+   > block number:        7032589
+   > block timestamp:     1619838082
+   > account:             0xca0272Aaa436E53a6Cc755454812d5A802bBFCE6
+   > balance:             0.29873147
+   > gas used:            153706 (0x2586a)
+   > gas price:           5 gwei
+   > value sent:          0 ETH
+   > total cost:          0.00076853 ETH
+
+
+   > Saving migration to chain.
+   > Saving artifacts
+   -------------------------------------
+   > Total cost:          0.00076853 ETH
+
+
+2_deploy_busd.js
+================
+
+   > Saving migration to chain.
+   -------------------------------------
+   > Total cost:                   0 ETH
+
+
+3_deploy_nft.js
+===============
+
+   Deploying 'LotteryNFT'
+   ----------------------
+   > transaction hash:    0xcc7db8df79d7be624905e8508b5adae8ce0df0544ccf18efc06530f7bb37d1e8
+   > Blocks: 3            Seconds: 9
+   > contract address:    0x1e2bAf64F630DC482086Fa12Fe541a43c624074a
+   > block number:        7032602
+   > block timestamp:     1619838121
+   > account:             0xca0272Aaa436E53a6Cc755454812d5A802bBFCE6
+   > balance:             0.28696919
+   > gas used:            2282946 (0x22d5c2)
+   > gas price:           5 gwei
+   > value sent:          0 ETH
+   > total cost:          0.01141473 ETH
+
+
+   > Saving migration to chain.
+   > Saving artifacts
+   -------------------------------------
+   > Total cost:          0.01141473 ETH
+
+
+4_deploy_lottery.js
+===================
+
+   Deploying 'Lottery'
+   -------------------
+   > transaction hash:    0xf7242f5d91b56397a4a514537adbbcb56ce54f8f1faa38ab6d960505cce45fbe
+   > Blocks: 3            Seconds: 9
+   > contract address:    0xfCC92421f5f59f1473657584E63bBeaf405cd8D3
+   > block number:        7032611
+   > block timestamp:     1619838148
+   > account:             0xca0272Aaa436E53a6Cc755454812d5A802bBFCE6
+   > balance:             0.270180405
+   > gas used:            3330502 (0x32d1c6)
+   > gas price:           5 gwei
+   > value sent:          0 ETH
+   > total cost:          0.01665251 ETH
+
+
+   > Saving migration to chain.
+   > Saving artifacts
+   -------------------------------------
+   > Total cost:          0.01665251 ETH
+
+
+5_deploy_proxy.js
+=================
+BUSD.address 0xe9e7cea3dedca5984780bafc599bd69add087d56
+LotteryNFT.address 0x1e2bAf64F630DC482086Fa12Fe541a43c624074a
+Lottery.address 0xfCC92421f5f59f1473657584E63bBeaf405cd8D3
+proxyAdmin 0xca0272Aaa436E53a6Cc755454812d5A802bBFCE6
+lotteryOwner 0xca1cca8f5637c9566d8C719C899440A88AF7D874
+lotteryAdmin 0xca1cca8f5637c9566d8C719C899440A88AF7D874
+minPrice 1000000000000000000
+abiEncodeData 0x11e42065000000000000000000000000e9e7cea3dedca5984780bafc599bd69add087d560000000000000000000000001e2baf64f630dc482086fa12fe541a43c624074a0000000000000000000000000000000000000000000000000de0b6b3a7640000000000000000000000000000000000000000000000000000000000000000000d000000000000000000000000ca1cca8f5637c9566d8c719c899440a88af7d874000000000000000000000000ca1cca8f5637c9566d8c719c899440a88af7d874
+
+   Deploying 'LotteryUpgradeProxy'
+   -------------------------------
+   > transaction hash:    0x83d86d2e36069ab5edb1990c3db039caf746aa705e84f3319f1785cdeedf3697
+   > Blocks: 5            Seconds: 13
+   > contract address:    0x9236020Ea390A8822d8E55d563CB8A7E2B730e60
+   > block number:        7032622
+   > block timestamp:     1619838181
+   > account:             0xca0272Aaa436E53a6Cc755454812d5A802bBFCE6
+   > balance:             0.26656507
+   > gas used:            695812 (0xa9e04)
+   > gas price:           5 gwei
+   > value sent:          0 ETH
+   > total cost:          0.00347906 ETH
+
+
+   > Saving migration to chain.
+   > Saving artifacts
+   -------------------------------------
+   > Total cost:          0.00347906 ETH
+
+
+Summary
+=======
+> Total deployments:   4
+> Final cost:          0.03231483 ETH
