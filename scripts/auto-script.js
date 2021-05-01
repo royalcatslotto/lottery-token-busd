@@ -128,8 +128,9 @@ function getUserAddress(privateKey) {
   }
 }
 
+const DRAWING_SCHEDULE = [2, 14] // run every 14.00 pm, 2.00 am (UTC time)
 const rule = new schedule.RecurrenceRule();
-rule.hour = 2; // run every 2.00 am (UTC time)
+rule.hour = DRAWING_SCHEDULE;
 rule.tz = 'Etc/UTC';
 
 async function main() {
