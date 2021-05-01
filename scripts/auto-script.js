@@ -10,7 +10,7 @@ const { mainnetPrivateKeys } = JSON.parse(fs.readFileSync('../.secret').toString
 
 const BN = Web3.utils.BN;
 const [_, alice] = mainnetPrivateKeys;
-const contractAddress = '0x0D63dD9C049da06B09A7B3a9A1134679C6D53cdc'; // LotteryUpgradeProxy
+const contractAddress = ''; // LotteryUpgradeProxy
 
 require('console-stamp')(console, {
   pattern: 'dd/mm/yyyy HH:MM:ss.l',
