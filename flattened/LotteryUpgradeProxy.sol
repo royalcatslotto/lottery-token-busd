@@ -1,5 +1,6 @@
-// SPDX-License-Identifier: MIT
 // File: contracts/proxy/Proxy.sol
+
+
 
 pragma solidity 0.6.12;
 
@@ -94,6 +95,8 @@ abstract contract Proxy {
 }
 
 // File: contracts/utils/Address.sol
+
+
 
 pragma solidity 0.6.12;
 
@@ -277,7 +280,11 @@ library Address {
 
 // File: contracts/proxy/UpgradeableProxy.sol
 
+
+
 pragma solidity 0.6.12;
+
+
 
 /**
  * @dev This contract implements an upgradeable proxy. It is upgradeable because calls are delegated to an
@@ -362,7 +369,10 @@ contract UpgradeableProxy is Proxy {
 
 // File: contracts/proxy/TransparentUpgradeableProxy.sol
 
+
+
 pragma solidity 0.6.12;
+
 
 /**
  * @dev This contract implements a proxy that is upgradeable by an admin.
@@ -532,7 +542,10 @@ contract TransparentUpgradeableProxy is UpgradeableProxy {
 
 // File: contracts/LotteryUpgradeProxy.sol
 
+
+
 pragma solidity 0.6.12;
+
 
 contract LotteryUpgradeProxy is TransparentUpgradeableProxy {
     constructor(

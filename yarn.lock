@@ -10540,7 +10540,7 @@ truffle-flattener@^1.4.4:
     mkdirp "^1.0.4"
     tsort "0.0.1"
 
-truffle-plugin-verify@^0.5.0:
+truffle-plugin-verify@^0.5.7:
   version "0.5.7"
   resolved "https://registry.yarnpkg.com/truffle-plugin-verify/-/truffle-plugin-verify-0.5.7.tgz#c684c0a78a0dad8bf00c631ba1ac41c53a7b5040"
   integrity sha512-q26VTkrpzI0lS8D1j8nKG2+2cmTwc7rkDkdtvbWKAdUV+5Ijemgeo8PeQBNKKFsTqYo1ebG7IWTLE+B/7KFo1A==

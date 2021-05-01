@@ -1,5 +1,6 @@
-// SPDX-License-Identifier: MIT
 // File: contracts/utils/Context.sol
+
+// SPDX-License-Identifier: MIT
 
 pragma solidity 0.6.12;
 
@@ -26,6 +27,7 @@ abstract contract Context {
 
 // File: contracts/introspection/IERC165.sol
 
+// SPDX-License-Identifier: MIT
 
 pragma solidity 0.6.12;
 
@@ -52,6 +54,7 @@ interface IERC165 {
 
 // File: contracts/token/ERC721/IERC721.sol
 
+// SPDX-License-Identifier: MIT
 
 pragma solidity 0.6.12;
 
@@ -213,6 +216,7 @@ interface IERC721 is IERC165 {
 
 // File: contracts/token/ERC721/IERC721Metadata.sol
 
+// SPDX-License-Identifier: MIT
 
 pragma solidity 0.6.12;
 
@@ -240,6 +244,7 @@ interface IERC721Metadata is IERC721 {
 
 // File: contracts/token/ERC721/IERC721Enumerable.sol
 
+// SPDX-License-Identifier: MIT
 
 pragma solidity 0.6.12;
 
@@ -272,6 +277,7 @@ interface IERC721Enumerable is IERC721 {
 
 // File: contracts/token/ERC721/IERC721Receiver.sol
 
+// SPDX-License-Identifier: MIT
 
 pragma solidity 0.6.12;
 
@@ -300,6 +306,7 @@ interface IERC721Receiver {
 
 // File: contracts/introspection/ERC165.sol
 
+// SPDX-License-Identifier: MIT
 
 pragma solidity 0.6.12;
 
@@ -360,6 +367,7 @@ contract ERC165 is IERC165 {
 
 // File: contracts/math/SafeMath.sol
 
+// SPDX-License-Identifier: MIT
 
 pragma solidity 0.6.12;
 
@@ -521,6 +529,7 @@ library SafeMath {
 
 // File: contracts/utils/Address.sol
 
+// SPDX-License-Identifier: MIT
 
 pragma solidity 0.6.12;
 
@@ -704,6 +713,7 @@ library Address {
 
 // File: contracts/utils/EnumerableSet.sol
 
+// SPDX-License-Identifier: MIT
 
 pragma solidity 0.6.12;
 
@@ -984,6 +994,7 @@ library EnumerableSet {
 
 // File: contracts/utils/EnumerableMap.sol
 
+// SPDX-License-Identifier: MIT
 
 pragma solidity 0.6.12;
 
@@ -1270,6 +1281,7 @@ library EnumerableMap {
 
 // File: contracts/utils/Strings.sol
 
+// SPDX-License-Identifier: MIT
 
 pragma solidity 0.6.12;
 
@@ -1306,6 +1318,7 @@ library Strings {
 
 // File: contracts/token/ERC721/ERC721.sol
 
+// SPDX-License-Identifier: MIT
 
 pragma solidity 0.6.12;
 
@@ -1896,6 +1909,7 @@ contract ERC721 is
 
 // File: contracts/utils/Counters.sol
 
+// SPDX-License-Identifier: MIT
 
 pragma solidity 0.6.12;
 
@@ -1937,6 +1951,7 @@ library Counters {
 
 // File: contracts/access/Ownable.sol
 
+// SPDX-License-Identifier: MIT
 
 pragma solidity 0.6.12;
 
@@ -2006,6 +2021,7 @@ contract Ownable is Context {
 
 // File: contracts/LotteryNFT.sol
 
+// SPDX-License-Identifier: MIT
 
 pragma solidity 0.6.12;
 pragma experimental ABIEncoderV2;
@@ -2087,6 +2103,7 @@ contract LotteryNFT is ERC721, Ownable {
 
 // File: contracts/token/ERC20/IERC20.sol
 
+// SPDX-License-Identifier: MIT
 
 pragma solidity 0.6.12;
 
@@ -2166,6 +2183,7 @@ interface IERC20 {
 
 // File: contracts/token/ERC20/SafeERC20.sol
 
+// SPDX-License-Identifier: MIT
 
 pragma solidity 0.6.12;
 
@@ -2300,6 +2318,7 @@ library SafeERC20 {
 
 // File: contracts/LotteryOwnable.sol
 
+// SPDX-License-Identifier: MIT
 
 pragma solidity 0.6.12;
 
@@ -2364,6 +2383,7 @@ contract LotteryOwnable {
 
 // File: contracts/proxy/Initializable.sol
 
+// SPDX-License-Identifier: MIT
 
 pragma solidity 0.6.12;
 
@@ -2431,8 +2451,16 @@ abstract contract Initializable {
 
 // File: contracts/Lottery.sol
 
+// SPDX-License-Identifier: MIT
 
 pragma solidity 0.6.12;
+pragma experimental ABIEncoderV2;
+
+
+
+
+
+
 
 // 4 numbers
 contract Lottery is LotteryOwnable, Initializable {
@@ -2442,7 +2470,7 @@ contract Lottery is LotteryOwnable, Initializable {
 
     uint8 constant keyLengthForEachBuy = 11;
     // Allocation for first/sencond/third reward
-    uint8[3] public allocation;
+    uint8[4] public allocation;
     // The TOKEN to buy lottery
     IERC20 public busd;
     // The Lottery NFT for tickets
@@ -2503,20 +2531,28 @@ contract Lottery is LotteryOwnable, Initializable {
         maxNumber = _maxNumber;
         adminAddress = _adminAddress;
         lastTimestamp = block.timestamp;
-        allocation = [60, 20, 10];
+        allocation = [50, 30, 10, 10];
         initOwner(_owner);
+        devAddress = _adminAddress;
     }
 
     uint8[4] private nullTicket = [0, 0, 0, 0];
+    address public devAddress;
 
     modifier onlyAdmin() {
-        require(msg.sender == adminAddress, "admin: wut?");
+        require(
+            msg.sender == adminAddress,
+            "Lottery::onlyAdmin:: only admin can call"
+        );
         _;
     }
 
     modifier inDrawingPhase() {
-        require(!drawed(), "drawed, can not buy now");
-        require(!drawingPhase, "drawing, can not buy now");
+        require(!drawed(), "Lottery::inDrawingPhase:: drawed, can not buy now");
+        require(
+            !drawingPhase,
+            "Lottery::inDrawingPhase:: drawing, can not buy now"
+        );
         _;
     }
 
@@ -2525,7 +2561,7 @@ contract Lottery is LotteryOwnable, Initializable {
     }
 
     function reset() external onlyAdmin {
-        require(drawed(), "drawed?");
+        require(drawed(), "Lottery::reset:: drawed?");
         lastTimestamp = block.timestamp;
         totalAddresses = 0;
         totalAmount = 0;
@@ -2535,23 +2571,39 @@ contract Lottery is LotteryOwnable, Initializable {
         winningNumbers[3] = 0;
         drawingPhase = false;
         issueIndex = issueIndex + 1;
+        // first prize
         if (getMatchingRewardAmount(issueIndex - 1, 4) == 0) {
             uint256 amount =
                 getTotalRewards(issueIndex - 1).mul(allocation[0]).div(100);
             internalBuy(amount, nullTicket);
         }
+        // second prize
+        if (getMatchingRewardAmount(issueIndex - 1, 3) == 0) {
+            uint256 amount =
+                getTotalRewards(issueIndex - 1).mul(allocation[1]).div(100);
+            internalBuy(amount, nullTicket);
+        }
+        // third prize
+        if (getMatchingRewardAmount(issueIndex - 1, 2) == 0) {
+            uint256 amount =
+                getTotalRewards(issueIndex - 1).mul(allocation[2]).div(100);
+            internalBuy(amount, nullTicket);
+        }
+        uint256 amount =
+            getTotalRewards(issueIndex - 1).mul(allocation[3]).div(100);
+        busd.transfer(devAddress, amount);
         emit Reset(issueIndex);
     }
 
     function enterDrawingPhase() external onlyAdmin {
-        require(!drawed(), "drawed");
+        require(!drawed(), "Lottery::enterDrawingPhase:: already drawed");
         drawingPhase = true;
     }
 
     // add externalRandomNumber to prevent node validators exploiting
     function drawing(uint256 _externalRandomNumber) external onlyAdmin {
-        require(!drawed(), "reset?");
-        require(drawingPhase, "enter drawing phase first");
+        require(!drawed(), "Lottery::drawing:: already drawed");
+        require(drawingPhase, "Lottery::drawing:: enter drawing phase first");
         bytes32 _structHash;
         uint256 _randomNumber;
         uint8 _maxNumber = maxNumber;
@@ -2580,7 +2632,7 @@ contract Lottery is LotteryOwnable, Initializable {
 
         // 2
         _structHash = keccak256(
-            abi.encode(_blockhash, totalAmount, gasLeft, _externalRandomNumber)
+            abi.encode(totalAmount, _blockhash, gasLeft, _externalRandomNumber)
         );
         _randomNumber = uint256(_structHash);
         assembly {
@@ -2620,9 +2672,12 @@ contract Lottery is LotteryOwnable, Initializable {
     }
 
     function internalBuy(uint256 _price, uint8[4] memory _numbers) internal {
-        require(!drawed(), "drawed, can not buy now");
+        require(!drawed(), "Lottery::internalBuy:: drawed, can not buy now");
         for (uint256 i = 0; i < 4; i++) {
-            require(_numbers[i] <= maxNumber, "exceed the maximum");
+            require(
+                _numbers[i] <= maxNumber,
+                "Lottery::internalBuy:: exceed the maximum"
+            );
         }
         uint256 tokenId =
             lotteryNFT.newLotteryItem(
@@ -2637,13 +2692,41 @@ contract Lottery is LotteryOwnable, Initializable {
         emit Buy(address(this), tokenId);
     }
 
+    function injectReward(uint256 _price, uint8[4] memory _numbers)
+        external
+        onlyAdmin
+    {
+        require(!drawed(), "Lottery::injectReward:: drawed, can not buy now");
+        for (uint256 i = 0; i < 4; i++) {
+            require(
+                _numbers[i] == 0,
+                "Lottery::injectReward:: accept only null ticket"
+            );
+        }
+        uint256 tokenId =
+            lotteryNFT.newLotteryItem(
+                address(this),
+                _numbers,
+                _price,
+                issueIndex
+            );
+        busd.safeTransferFrom(address(msg.sender), address(this), _price);
+        lotteryInfo[issueIndex].push(tokenId);
+        totalAmount = totalAmount.add(_price);
+        lastTimestamp = block.timestamp;
+        emit Buy(address(this), tokenId);
+    }
+
     function buy(uint256 _price, uint8[4] memory _numbers)
         external
         inDrawingPhase
     {
-        require(_price >= minPrice, "price must above minPrice");
+        require(_price >= minPrice, "Lottery:buy:: price must above minPrice");
         for (uint256 i = 0; i < 4; i++) {
-            require(_numbers[i] <= maxNumber, "exceed number scope");
+            require(
+                _numbers[i] <= maxNumber,
+                "Lottery::buy:: exceed number scope"
+            );
         }
         uint256 tokenId =
             lotteryNFT.newLotteryItem(msg.sender, _numbers, _price, issueIndex);
@@ -2670,13 +2753,16 @@ contract Lottery is LotteryOwnable, Initializable {
         external
         inDrawingPhase
     {
-        require(_price >= minPrice, "price must above minPrice");
+        require(
+            _price >= minPrice,
+            "Lottery::multiBuy:: price must above minPrice"
+        );
         uint256 totalPrice = 0;
         for (uint256 i = 0; i < _numbers.length; i++) {
             for (uint256 j = 0; j < 4; j++) {
                 require(
                     _numbers[i][j] <= maxNumber && _numbers[i][j] > 0,
-                    "exceed number scope"
+                    "Lottery::multiBuy:: exceed number scope"
                 );
             }
             uint256 tokenId =
@@ -2707,8 +2793,14 @@ contract Lottery is LotteryOwnable, Initializable {
     }
 
     function claimReward(uint256 _tokenId) external {
-        require(msg.sender == lotteryNFT.ownerOf(_tokenId), "not from owner");
-        require(!lotteryNFT.getClaimStatus(_tokenId), "claimed");
+        require(
+            msg.sender == lotteryNFT.ownerOf(_tokenId),
+            "Lottery::claimReward:: not from owner"
+        );
+        require(
+            !lotteryNFT.getClaimStatus(_tokenId),
+            "Lottery::claimReward:: claimed"
+        );
         uint256 reward = getRewardView(_tokenId);
         lotteryNFT.claimReward(_tokenId);
         if (reward > 0) {
@@ -2722,9 +2814,12 @@ contract Lottery is LotteryOwnable, Initializable {
         for (uint256 i = 0; i < _tickets.length; i++) {
             require(
                 msg.sender == lotteryNFT.ownerOf(_tickets[i]),
-                "not from owner"
+                "Lottery::multiClaim:: not from owner"
             );
-            require(!lotteryNFT.getClaimStatus(_tickets[i]), "claimed");
+            require(
+                !lotteryNFT.getClaimStatus(_tickets[i]),
+                "Lottery::multiClaim:: claimed"
+            );
             uint256 reward = getRewardView(_tickets[i]);
             if (reward > 0) {
                 totalReward = reward.add(totalReward);
@@ -2952,7 +3047,10 @@ contract Lottery is LotteryOwnable, Initializable {
         view
         returns (uint256)
     {
-        require(_issueIndex <= issueIndex, "_issueIndex <= issueIndex");
+        require(
+            _issueIndex <= issueIndex,
+            "Lottery::getTotalRewards:: _issueIndex <= issueIndex"
+        );
 
         if (!drawed() && _issueIndex == issueIndex) {
             return totalAmount;
@@ -2964,7 +3062,7 @@ contract Lottery is LotteryOwnable, Initializable {
         uint256 _issueIndex = lotteryNFT.getLotteryIssueIndex(_tokenId);
         uint8[4] memory lotteryNumbers = lotteryNFT.getLotteryNumbers(_tokenId);
         uint8[4] memory _winningNumbers = historyNumbers[_issueIndex];
-        require(_winningNumbers[0] != 0, "not drawed");
+        require(_winningNumbers[0] != 0, "Lottery::getRewardView:: not drawed");
 
         uint256 matchingNumber = 0;
         for (uint256 i = 0; i < lotteryNumbers.length; i++) {
@@ -2977,7 +3075,7 @@ contract Lottery is LotteryOwnable, Initializable {
             uint256 amount = lotteryNFT.getLotteryAmount(_tokenId);
             uint256 poolAmount =
                 getTotalRewards(_issueIndex)
-                    .mul(allocation[4 - matchingNumber])
+                    .mul(allocation[3 - matchingNumber])
                     .div(100);
             reward = amount
                 .mul(1e12)
@@ -3012,9 +3110,17 @@ contract Lottery is LotteryOwnable, Initializable {
     function setAllocation(
         uint8 _allcation1,
         uint8 _allcation2,
-        uint8 _allcation3
+        uint8 _allcation3,
+        uint8 _allcation4
     ) external onlyAdmin {
-        require(_allcation1 + _allcation2 + _allcation3 < 100, "exceed 100");
-        allocation = [_allcation1, _allcation2, _allcation3];
+        require(
+            _allcation1 + _allcation2 + _allcation3 + _allcation4 <= 100,
+            "Lottery::setAllocation:: exceed 100"
+        );
+        allocation = [_allcation1, _allcation2, _allcation3, _allcation4];
+    }
+
+    function setDevAddress(address _newAddress) external onlyAdmin {
+        devAddress = _newAddress;
     }
 }
