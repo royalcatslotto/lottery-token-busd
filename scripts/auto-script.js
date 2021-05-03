@@ -128,13 +128,19 @@ function getUserAddress(privateKey) {
   }
 }
 
-const DRAWING_SCHEDULE = [2, 14] // run every 14.00 pm, 2.00 am (UTC time)
-const rule = new schedule.RecurrenceRule();
-rule.hour = DRAWING_SCHEDULE;
-rule.tz = 'Etc/UTC';
+const DRAWING_SCHEDULE = [2, 14] // run every 9.00 am, 9.00 pm (GMT+7 time)
+const drawingRule = new schedule.RecurrenceRule();
+drawingRule.hour = DRAWING_SCHEDULE;
+drawingRule.tz = 'Etc/UTC';
+
+const RESET_SCHEDULE = [3, 15] // run every 10.00 am, 10.00 pm (GMT+7 time)
+const resetRule = new schedule.RecurrenceRule();
+resetRule.hour = RESET_SCHEDULE;
+resetRule.tz = 'Etc/UTC';
 
 async function main() {
-  const job = schedule.scheduleJob(rule, async () => {
+  // Drawing schedule
+  const drawingJob = schedule.scheduleJob(drawingRule, async () => {
     const datetime = new Date().toISOString()
     console.log(`Scheduler running: ${datetime}`)
 
@@ -146,10 +152,22 @@ async function main() {
       await drawing(alice);
     }
     catch (err) {
-      // await reset(alice); // reset
       console.error(err);
     }
   });
+
+  // Reset schedule
+  const resetStateJob = schedule.scheduleJob(resetRule, async () => {
+    const datetime = new Date().toISOString()
+    console.log(`Scheduler running: ${datetime}`)
+
+    try {
+      await reset(alice);
+    }
+    catch (err) {
+      console.error(err);
+    }
+  })
 
   // while (1) {
   //   console.log("Initializing...");
