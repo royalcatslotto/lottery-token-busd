@@ -6,11 +6,12 @@ const schedule = require('node-schedule');
 const Lottery = require('../build/contracts/Lottery.json');
 const { privateKeys } = JSON.parse(fs.readFileSync('../.secret').toString().trim());
 const { mainnetPrivateKeys } = JSON.parse(fs.readFileSync('../.secret').toString().trim());
-const CHAIN_ID = 56; // mainnet
+// const CHAIN_ID = 56; // mainnet
+const CHAIN_ID = 97; // testnet
 
 const BN = Web3.utils.BN;
-const [_, alice] = mainnetPrivateKeys;
-const contractAddress = ''; // LotteryUpgradeProxy
+const [_, alice] = privateKeys;
+const contractAddress = '0x0D63dD9C049da06B09A7B3a9A1134679C6D53cdc'; // LotteryUpgradeProxy
 
 require('console-stamp')(console, {
   pattern: 'dd/mm/yyyy HH:MM:ss.l',
@@ -20,16 +21,16 @@ require('console-stamp')(console, {
   }
 });
 
-// const web3 = new Web3(
-//   new Web3.providers.HttpProvider(
-//     'https://data-seed-prebsc-1-s1.binance.org:8545'
-//   )
-// );
 const web3 = new Web3(
   new Web3.providers.HttpProvider(
-    'https://bsc-dataseed.binance.org'
+    'https://data-seed-prebsc-1-s1.binance.org:8545'
   )
 );
+// const web3 = new Web3(
+//   new Web3.providers.HttpProvider(
+//     'https://bsc-dataseed.binance.org'
+//   )
+// );
 
 // console.log('Lottery.abi', Lottery.abi);
 
@@ -131,18 +132,22 @@ function getUserAddress(privateKey) {
 const DRAWING_SCHEDULE = [2, 14] // run every 9.00 am, 9.00 pm (GMT+7 time)
 const drawingRule = new schedule.RecurrenceRule();
 drawingRule.hour = DRAWING_SCHEDULE;
+drawingRule.minute = 0;
 drawingRule.tz = 'Etc/UTC';
 
 const RESET_SCHEDULE = [3, 15] // run every 10.00 am, 10.00 pm (GMT+7 time)
 const resetRule = new schedule.RecurrenceRule();
 resetRule.hour = RESET_SCHEDULE;
+resetRule.minute = 0;
 resetRule.tz = 'Etc/UTC';
 
 async function main() {
+  console.log('Scheduler starting')
+
   // Drawing schedule
   const drawingJob = schedule.scheduleJob(drawingRule, async () => {
     const datetime = new Date().toISOString()
-    console.log(`Scheduler running: ${datetime}`)
+    console.log(`Scheduler drawing job: ${datetime}`)
 
     // [TODO] 
     //  1. handler error when state is drawed
@@ -159,7 +164,7 @@ async function main() {
   // Reset schedule
   const resetStateJob = schedule.scheduleJob(resetRule, async () => {
     const datetime = new Date().toISOString()
-    console.log(`Scheduler running: ${datetime}`)
+    console.log(`Scheduler reset job: ${datetime}`)
 
     try {
       await reset(alice);
