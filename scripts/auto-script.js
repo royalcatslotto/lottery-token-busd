@@ -129,19 +129,25 @@ function getUserAddress(privateKey) {
   }
 }
 
+const DRAWING_SCHEDULE = [2, 14] // run every 9.00 am, 9.00 pm (GMT+7 time)
 const drawingRule = new schedule.RecurrenceRule();
-drawingRule.minute = 5; // run every 5 minutes
+drawingRule.hour = DRAWING_SCHEDULE;
+drawingRule.minute = 0;
 drawingRule.tz = 'Etc/UTC';
 
+const RESET_SCHEDULE = [3, 15] // run every 10.00 am, 10.00 pm (GMT+7 time)
 const resetRule = new schedule.RecurrenceRule();
-resetRule.minute = 10; // run every 10 minutes
+resetRule.hour = RESET_SCHEDULE;
+resetRule.minute = 0;
 resetRule.tz = 'Etc/UTC';
 
 async function main() {
+  console.log('Scheduler starting')
+
   // Drawing schedule
   const drawingJob = schedule.scheduleJob(drawingRule, async () => {
     const datetime = new Date().toISOString()
-    console.log(`Scheduler running: ${datetime}`)
+    console.log(`Scheduler drawing job: ${datetime}`)
 
     // [TODO] 
     //  1. handler error when state is drawed
@@ -158,7 +164,7 @@ async function main() {
   // Reset schedule
   const resetStateJob = schedule.scheduleJob(resetRule, async () => {
     const datetime = new Date().toISOString()
-    console.log(`Scheduler running: ${datetime}`)
+    console.log(`Scheduler reset job: ${datetime}`)
 
     try {
       await reset(alice);
