@@ -10,6 +10,9 @@ import "./access/Ownable.sol";
 contract LotteryReferral is ILotteryReferral, Ownable {
     using SafeERC20 for IERC20;
 
+    // BUSD TOKEN
+    IERC20 public rewardToken;
+
     mapping(address => bool) public operators;
     mapping(address => address) public referrers; // user address => referrer address
     mapping(address => uint256) public referralsCount; // referrer address => referrals count
@@ -18,6 +21,13 @@ contract LotteryReferral is ILotteryReferral, Ownable {
     event ReferralRecorded(address indexed user, address indexed referrer);
     event ReferralCommissionRecorded(address indexed referrer, uint256 commission);
     event OperatorUpdated(address indexed operator, bool indexed status);
+    event Claim(address indexed user, uint256 amount);
+
+    constructor(
+        IERC20 _rewardToken
+    ) public {
+        rewardToken = _rewardToken;
+    }
 
     modifier onlyOperator {
         require(operators[msg.sender], "Operator: caller is not the operator");
@@ -41,6 +51,19 @@ contract LotteryReferral is ILotteryReferral, Ownable {
             totalReferralCommissions[_referrer] += _commission;
             emit ReferralCommissionRecorded(_referrer, _commission);
         }
+    }
+
+    function claimReward() public {
+        uint256 reward = pendingReward(msg.sender);
+        if (reward > 0) {
+            rewardToken.transfer(address(msg.sender), reward);
+            emit Claim(msg.sender, reward);     
+        }
+    }
+
+    // View function to see pending Reward on frontend.
+    function pendingReward(address _user) public view returns (uint256) {
+        return totalReferralCommissions[_user];
     }
 
     // Get the referrer address that referred the user

@@ -1,4 +1,4 @@
-const LotteryReferral = artifacts.require('LotteryReferral');
+const LotteryModSalary = artifacts.require('LotteryModSalary');
 const Web3 = require('web3');
 
 const BUSD = {
@@ -7,5 +7,5 @@ const BUSD = {
 
 module.exports = async function (deployer, network, addresses) {
   const [admin] = addresses;
-  await deployer.deploy(LotteryReferral,BUSD.address, { from: admin });
+  await deployer.deploy(LotteryModSalary,BUSD.address, { from: admin });
 };
