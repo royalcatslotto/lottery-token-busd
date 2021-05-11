@@ -8,3 +8,7 @@
 - _user is the user who are referred by _referrer
 - referralsCount function is called from frontend (return int)
 - totalReferralCommissions is called from frontend (return uint256)
+- claim button will display (visible) from frontend if totalReferralCommissions > 0  
+- claimCommission is called from frontend 
+- after claimCommission transaction is completed, call totalReferralCommissions function again. It should only return 0
+- after claimCommission transaction is completed, claim button should disappear;
