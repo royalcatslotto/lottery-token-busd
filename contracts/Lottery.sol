@@ -60,7 +60,7 @@ contract Lottery is LotteryOwnable, Initializable {
     // Referral commission rate in basis points.
     uint16 public referralCommissionRate = 100;
     // Max referral commission rate: 10%.
-    //uint16 public constant MAXIMUM_REFERRAL_COMMISSION_RATE = 1000;
+    uint16 public constant MAXIMUM_REFERRAL_COMMISSION_RATE = 1000;
     // =================================
 
     event Buy(address indexed user, uint256 tokenId);
@@ -304,7 +304,7 @@ contract Lottery is LotteryOwnable, Initializable {
         }
         busd.safeTransferFrom(address(msg.sender), address(this), _price);
         // record referral
-        if (totalPrice > 0 && address(lotteryReferral) != address(0) && _referrer != address(0) && _referrer != msg.sender) {
+        if (_price > 0 && address(lotteryReferral) != address(0) && _referrer != address(0) && _referrer != address(msg.sender)) {
             lotteryReferral.recordReferral(msg.sender, _referrer);
         }
         emit Buy(msg.sender, tokenId);
