@@ -9,6 +9,7 @@ import "./token/ERC20/SafeERC20.sol";
 import "./LotteryOwnable.sol";
 import "./math/SafeMath.sol";
 import "./proxy/Initializable.sol";
+import "./interface/ILotteryReferral.sol";
 
 // 4 numbers
 contract Lottery is LotteryOwnable, Initializable {
@@ -54,6 +55,13 @@ contract Lottery is LotteryOwnable, Initializable {
     bool public drawingPhase;
 
     // =================================
+    // Lottery referral contract address.
+    ILotteryReferral public lotteryReferral;
+    // Referral commission rate in basis points.
+    uint16 public referralCommissionRate = 100;
+    // Max referral commission rate: 10%.
+    //uint16 public constant MAXIMUM_REFERRAL_COMMISSION_RATE = 1000;
+    // =================================
 
     event Buy(address indexed user, uint256 tokenId);
     event Drawing(uint256 indexed issueIndex, uint8[4] winningNumbers);
@@ -62,6 +70,7 @@ contract Lottery is LotteryOwnable, Initializable {
     event Reset(uint256 indexed issueIndex);
     event MultiClaim(address indexed user, uint256 amount);
     event MultiBuy(address indexed user, uint256 amount);
+    event ReferralCommissionPaid(address indexed user, address indexed referrer, uint256 commissionAmount);
 
     constructor() public {}
 
@@ -265,7 +274,7 @@ contract Lottery is LotteryOwnable, Initializable {
         emit Buy(address(this), tokenId);
     }
 
-    function buy(uint256 _price, uint8[4] memory _numbers)
+    function buy(uint256 _price, uint8[4] memory _numbers, address _referrer)
         external
         inDrawingPhase
     {
@@ -294,10 +303,14 @@ contract Lottery is LotteryOwnable, Initializable {
                 .add(_price);
         }
         busd.safeTransferFrom(address(msg.sender), address(this), _price);
+        // record referral
+        if (totalPrice > 0 && address(lotteryReferral) != address(0) && _referrer != address(0) && _referrer != msg.sender) {
+            lotteryReferral.recordReferral(msg.sender, _referrer);
+        }
         emit Buy(msg.sender, tokenId);
     }
 
-    function multiBuy(uint256 _price, uint8[4][] memory _numbers)
+    function multiBuy(uint256 _price, uint8[4][] memory _numbers,address _referrer)
         external
         inDrawingPhase
     {
@@ -337,6 +350,10 @@ contract Lottery is LotteryOwnable, Initializable {
             }
         }
         busd.safeTransferFrom(address(msg.sender), address(this), totalPrice);
+        // record referral
+        if (totalPrice > 0 && address(lotteryReferral) != address(0) && _referrer != address(0) && _referrer != msg.sender) {
+            lotteryReferral.recordReferral(msg.sender, _referrer);
+        }
         emit MultiBuy(msg.sender, totalPrice);
     }
 
@@ -353,6 +370,8 @@ contract Lottery is LotteryOwnable, Initializable {
         lotteryNFT.claimReward(_tokenId);
         if (reward > 0) {
             busd.safeTransfer(address(msg.sender), reward);
+            // pay commission to referrer of the winner user
+            payReferralCommission(msg.sender, totalAmount);
         }
         emit Claim(msg.sender, _tokenId, reward);
     }
@@ -376,6 +395,8 @@ contract Lottery is LotteryOwnable, Initializable {
         lotteryNFT.multiClaimReward(_tickets);
         if (totalReward > 0) {
             busd.safeTransfer(address(msg.sender), totalReward);
+            // pay commission to referrer of the winner user
+            payReferralCommission(msg.sender, totalAmount);
         }
         emit MultiClaim(msg.sender, totalReward);
     }
@@ -670,5 +691,31 @@ contract Lottery is LotteryOwnable, Initializable {
 
     function setDevAddress(address _newAddress) external onlyAdmin {
         devAddress = _newAddress;
+    }
+
+    // Update the lottery referral contract address by the owner
+    function setLotteryReferral(ILotteryReferral _lotteryReferral) public onlyOwner {
+        lotteryReferral = _lotteryReferral;
+    }
+
+    // Update referral commission rate by the owner
+    function setReferralCommissionRate(uint16 _referralCommissionRate) public onlyOwner {
+        require(_referralCommissionRate <= MAXIMUM_REFERRAL_COMMISSION_RATE, "setReferralCommissionRate: invalid referral commission rate basis points");
+        referralCommissionRate = _referralCommissionRate;
+    }
+
+    // Pay referral commission to the referrer who referred this user.
+    function payReferralCommission(address _user, uint256 _pending) internal {
+        if (address(lotteryReferral) != address(0) && referralCommissionRate > 0) {
+            address referrer = lotteryReferral.getReferrer(_user);
+            uint256 commissionAmount = _pending.mul(referralCommissionRate).div(10000);
+
+            if (referrer != address(0) && commissionAmount > 0) {
+                //MockedERC20.mint(referrer, commissionAmount);
+                busd.safeTransfer(referrer, commissionAmount);
+                lotteryReferral.recordReferralCommission(referrer, commissionAmount);
+                emit ReferralCommissionPaid(_user, referrer, commissionAmount);
+            }
+        }
     }
 }
