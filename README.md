@@ -21,6 +21,10 @@
 
 ## Bitkub Chain Mainnet
 - WKUB: [0xDa91a1aee4d7829c118cD6218CDA2cB2C56dd010](https://bkcscan.com/tokens/0xDa91a1aee4d7829c118cD6218CDA2cB2C56dd010/token-transfers)
+- LotteryNFT: [0xfCC92421f5f59f1473657584E63bBeaf405cd8D3]
+- Lottery: [0x9236020Ea390A8822d8E55d563CB8A7E2B730e60]
+- LotteryUpgradeProxy: [0x130fddDD211744699F1083f815d83f7cc1Fe93F9]
+- LotteryReferral: [0xE1fcB6bB08ee04fDe041c1b50f0B52cFb2a7b465]
 
 # Current User address (testnet)
 - Proxy admin: `0xad1F66Acea98733D63cd8FC522118e4014Cb3F79`

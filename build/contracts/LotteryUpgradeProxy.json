@@ -56,7 +56,8 @@
     },
     {
       "stateMutability": "payable",
-      "type": "fallback"
+      "type": "fallback",
+      "payable": true
     },
     {
       "inputs": [],
@@ -126,11 +127,13 @@
       "name": "upgradeToAndCall",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function"
+      "type": "function",
+      "payable": true
     },
     {
       "stateMutability": "payable",
-      "type": "receive"
+      "type": "receive",
+      "payable": true
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"logic\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"admin\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"previousAdmin\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"newAdmin\",\"type\":\"address\"}],\"name\":\"AdminChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"implementation\",\"type\":\"address\"}],\"name\":\"Upgraded\",\"type\":\"event\"},{\"stateMutability\":\"payable\",\"type\":\"fallback\"},{\"inputs\":[],\"name\":\"admin\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newAdmin\",\"type\":\"address\"}],\"name\":\"changeAdmin\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"implementation\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newImplementation\",\"type\":\"address\"}],\"name\":\"upgradeTo\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newImplementation\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"upgradeToAndCall\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"stateMutability\":\"payable\",\"type\":\"receive\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"admin()\":{\"details\":\"Returns the current admin. NOTE: Only the admin can call this function. See {ProxyAdmin-getProxyAdmin}. TIP: To get this value clients can read directly from the storage slot shown below (specified by EIP1967) using the https://eth.wiki/json-rpc/API#eth_getstorageat[`eth_getStorageAt`] RPC call. `0xb53127684a568b3173ae13b9f8a6016e243e63b6e8ee1178d6a717850b5d6103`\"},\"changeAdmin(address)\":{\"details\":\"Changes the admin of the proxy. Emits an {AdminChanged} event. NOTE: Only the admin can call this function. See {ProxyAdmin-changeProxyAdmin}.\"},\"implementation()\":{\"details\":\"Returns the current implementation. NOTE: Only the admin can call this function. See {ProxyAdmin-getProxyImplementation}. TIP: To get this value clients can read directly from the storage slot shown below (specified by EIP1967) using the https://eth.wiki/json-rpc/API#eth_getstorageat[`eth_getStorageAt`] RPC call. `0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc`\"},\"upgradeTo(address)\":{\"details\":\"Upgrade the implementation of the proxy. NOTE: Only the admin can call this function. See {ProxyAdmin-upgrade}.\"},\"upgradeToAndCall(address,bytes)\":{\"details\":\"Upgrade the implementation of the proxy, and then call a function from the new implementation as specified by `data`, which should be an encoded function call. This is useful to initialize new storage variables in the proxied contract. NOTE: Only the admin can call this function. See {ProxyAdmin-upgradeAndCall}.\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/Users/hbot/Desktop/saltery/lottery-token-busd/contracts/LotteryUpgradeProxy.sol\":\"LotteryUpgradeProxy\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/hbot/Desktop/saltery/lottery-token-busd/contracts/LotteryUpgradeProxy.sol\":{\"keccak256\":\"0xd36c1774d85b992e47b6d997b235930efbd2a20dbf7d72eb9615bac2e824a2e7\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://99db36d9eb356f522634ca6dae5020b98473f4a903c2d1b206db185735bafaf1\",\"dweb:/ipfs/Qmf4mTQcSQG6wvuuMEXQFRoNd6yHtTAsyxUA6n6EPGFuQg\"]},\"/Users/hbot/Desktop/saltery/lottery-token-busd/contracts/proxy/Proxy.sol\":{\"keccak256\":\"0xd51ad70248998694ccbad6a57a8b209bfd8f182be72835c8b01975304239d4f6\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://1134f885099e70ffcbef8afc4043e8a53af850d40b6b8b3511861b0df33ab14f\",\"dweb:/ipfs/QmXyeD2xPKB6ZR2FWd82kTNu3jYzA3usWBqBTQrGdJhhL9\"]},\"/Users/hbot/Desktop/saltery/lottery-token-busd/contracts/proxy/TransparentUpgradeableProxy.sol\":{\"keccak256\":\"0xd96f868f0d747cb810a83fc2d6639a8a1030b3971316aa873c54a6d0ce1ba62a\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ef0658119f19ecd53f4e756c284da0ff87639ac7672560aea383d32acf41918e\",\"dweb:/ipfs/Qmf3eSoGYhoS3p7kYqHTh5MpYGSDvQd2BXZRfN67fBmLVd\"]},\"/Users/hbot/Desktop/saltery/lottery-token-busd/contracts/proxy/UpgradeableProxy.sol\":{\"keccak256\":\"0x93f2260ec4b6c35e0bf6570f2262625cac7ccb8c3c372e3bd9f57bc841f1f521\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://a6255da07675d35b243d11c18fc7b710a07c202800b0be20fb938219678cdcf4\",\"dweb:/ipfs/QmNj1TXtSnNqa3ZNU93osdzZFpMe9Zevn2FurCyihMfaEt\"]},\"/Users/hbot/Desktop/saltery/lottery-token-busd/contracts/utils/Address.sol\":{\"keccak256\":\"0x17d17ecb13ef5b4fe30032a254a7678fd77ea5e53b40f21be3df90fa6b22b0fc\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://b486029b7a521a335131783f90e76e7f26f1e894b8b0fe0707200adb6e9fad50\",\"dweb:/ipfs/QmWkqMqQGVWkaA6CJqaf7RD4E8RyNPhC2F4PkQRF5FwSCx\"]}},\"version\":1}",
@@ -704,6 +707,12 @@
       "address": "0x9236020Ea390A8822d8E55d563CB8A7E2B730e60",
       "transactionHash": "0x83d86d2e36069ab5edb1990c3db039caf746aa705e84f3319f1785cdeedf3697"
     },
+    "96": {
+      "events": {},
+      "links": {},
+      "address": "0x130fddDD211744699F1083f815d83f7cc1Fe93F9",
+      "transactionHash": "0x6569296cd4f053cff82aa46aac96d6e967df7296d549b77910ec61ed8d5cf129"
+    },
     "97": {
       "events": {
         "0x7e644d79422f17c01e4894b5f4f588d331ebfa28653d42ae832dc59e38c9798f": {
@@ -745,7 +754,8 @@
     }
   },
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-05-11T13:16:51.571Z",
+  "updatedAt": "2021-05-23T07:39:49.671Z",
+  "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
     "methods": {
