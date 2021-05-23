@@ -19,6 +19,9 @@
 - Lottery: [0xfCC92421f5f59f1473657584E63bBeaf405cd8D3](https://bscscan.com/address/0xfCC92421f5f59f1473657584E63bBeaf405cd8D3#code)
 - LotteryUpgradeProxy: [0x9236020Ea390A8822d8E55d563CB8A7E2B730e60](https://bscscan.com/address/0x9236020Ea390A8822d8E55d563CB8A7E2B730e60#code)
 
+## Bitkub Chain Mainnet
+- WKUB: [0xDa91a1aee4d7829c118cD6218CDA2cB2C56dd010](https://bkcscan.com/tokens/0xDa91a1aee4d7829c118cD6218CDA2cB2C56dd010/token-transfers)
+
 # Current User address (testnet)
 - Proxy admin: `0xad1F66Acea98733D63cd8FC522118e4014Cb3F79`
 - Lottery owner: `0xa11cec4fF714C34775318544e97842344A9F3aDc`

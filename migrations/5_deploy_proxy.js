@@ -1,7 +1,8 @@
 const LotteryNFT = artifacts.require('LotteryNFT');
 //const BUSD = artifacts.require('BUSD'); // BUSD Testnet
 const BUSD = {
-  address: "0xe9e7cea3dedca5984780bafc599bd69add087d56"
+  //address: "0xe9e7cea3dedca5984780bafc599bd69add087d56"
+  address: "0xDa91a1aee4d7829c118cD6218CDA2cB2C56dd010" // KUB Token
 } // BUSD Mainnet
 
 const Lottery = artifacts.require('Lottery');
