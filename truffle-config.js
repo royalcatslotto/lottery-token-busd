@@ -38,6 +38,11 @@ const binanceMainnetProvider = new HDWalletProvider({
   providerOrUrl: `https://bsc-dataseed.binance.org`
 });
 
+const bitkubMainnetProvider = new HDWalletProvider({
+  privateKeys: mainnetPrivateKeys,
+  providerOrUrl: `https://rpc.bitkubchain.io`
+});
+
 module.exports = {
   /**
    * Networks define how you connect to your ethereum client and let you set the
@@ -70,6 +75,13 @@ module.exports = {
       gasPrice: Web3.utils.toWei('5', 'gwei'),
       skipDryRun: true,
     },
+    bitkubMainnet: {
+      provider: () => bitkubMainnetProvider,
+      network_id: '96',
+      gas: 5000000,
+      gasPrice: Web3.utils.toWei('50', 'gwei'),
+      skipDryRun: true,
+    }
     // Useful for testing. The `development` name is special - truffle uses it by default
     // if it's defined here and no other network is specified at the command line.
     // You should run a client (like ganache-cli, geth or parity) in a separate terminal
