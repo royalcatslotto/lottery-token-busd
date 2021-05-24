@@ -7,11 +7,11 @@ const Lottery = require('../build/contracts/Lottery.json');
 const { privateKeys } = JSON.parse(fs.readFileSync('../.secret').toString().trim());
 const { mainnetPrivateKeys } = JSON.parse(fs.readFileSync('../.secret').toString().trim());
 // const CHAIN_ID = 56; // mainnet
-const CHAIN_ID = 97; // testnet
+const CHAIN_ID = 96; // BKC mainnet
+const contractAddress = '0x130fddDD211744699F1083f815d83f7cc1Fe93F9'; // LotteryUpgradeProxy
 
 const BN = Web3.utils.BN;
 const [_, alice] = privateKeys;
-const contractAddress = '0x0D63dD9C049da06B09A7B3a9A1134679C6D53cdc'; // LotteryUpgradeProxy
 
 require('console-stamp')(console, {
   pattern: 'dd/mm/yyyy HH:MM:ss.l',

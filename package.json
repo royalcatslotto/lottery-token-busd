@@ -23,7 +23,8 @@
     "compile": "truffle compile --network development",
     "test": "rm -rf contracts/flattened/*.sol && truffle test",
     "flatten": "truffle-flattener contracts/Lottery.sol > flattened/Lottery.sol",
-    "flatten2": "truffle-flattener contracts/LotteryUpgradeProxy.sol > flattened/LotteryUpgradeProxy.sol"
+    "flatten2": "truffle-flattener contracts/LotteryUpgradeProxy.sol > flattened/LotteryUpgradeProxy.sol",
+    "flatten3": "truffle-flattener contracts/LotteryNFT.sol > flattened/LotteryNFT.sol"
   },
   "dependencies": {
     "@openzeppelin/contracts": "^3.2.0",
