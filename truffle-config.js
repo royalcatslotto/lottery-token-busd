@@ -43,6 +43,11 @@ const bitkubMainnetProvider = new HDWalletProvider({
   providerOrUrl: `https://rpc.bitkubchain.io`
 });
 
+const bitkubTestnetProvider = new HDWalletProvider({
+  privateKeys: mainnetPrivateKeys,
+  providerOrUrl: `https://testnet-rpc.bitkubchain.io`
+});
+
 module.exports = {
   /**
    * Networks define how you connect to your ethereum client and let you set the
@@ -78,6 +83,13 @@ module.exports = {
     bitkubMainnet: {
       provider: () => bitkubMainnetProvider,
       network_id: '96',
+      gas: 5000000,
+      gasPrice: Web3.utils.toWei('50', 'gwei'),
+      skipDryRun: true,
+    },
+    bitkubTestnet: {
+      provider: () => bitkubTestnetProvider,
+      network_id: '25925',
       gas: 5000000,
       gasPrice: Web3.utils.toWei('50', 'gwei'),
       skipDryRun: true,
