@@ -1,4 +1,4 @@
-truffle migrate --network binanceMainnet
+➜  lottery-token-busd git:(bkc-testnet) ✗ truffle deploy --network bitkubTestnet --reset
 
 Compiling your contracts...
 ===========================
@@ -8,41 +8,57 @@ Compiling your contracts...
 
 Starting migrations...
 ======================
-> Network name:    'binanceMainnet'
-> Network id:      56
-> Block gas limit: 39971967 (0x261ec7f)
+> Network name:    'bitkubTestnet'
+> Network id:      25925
+> Block gas limit: 300000000 (0x11e1a300)
 
 
 1_initial_migration.js
 ======================
 
-   Deploying 'Migrations'
+   Replacing 'Migrations'
    ----------------------
-   > transaction hash:    0xab8948ed5beeff66e0efc86331d667627c85ed4a97cd2761d143070da475d3f7
-   > Blocks: 3            Seconds: 9
-   > contract address:    0x4CD50a81D5eEcD205D33b832EcCA6F757dec5C3b
-   > block number:        7032589
-   > block timestamp:     1619838082
-   > account:             0xca0272Aaa436E53a6Cc755454812d5A802bBFCE6
-   > balance:             0.29873147
+   > transaction hash:    0x166e0c69ca8cbc9b698340fdd97257ccccb51f15b0f1d7ea4d909258533baa1b
+   > Blocks: 2            Seconds: 8
+   > contract address:    0x7167d48b0FEAdBa5efc78e40524f0b5CBEb41428
+   > block number:        1241894
+   > block timestamp:     1623904349
+   > account:             0x4D2159FF4c2250AfbB839eeB7DD50A94b2Df1A67
+   > balance:             11.340298700000000001
    > gas used:            153706 (0x2586a)
-   > gas price:           5 gwei
+   > gas price:           50 gwei
    > value sent:          0 ETH
-   > total cost:          0.00076853 ETH
+   > total cost:          0.0076853 ETH
 
 
    > Saving migration to chain.
    > Saving artifacts
    -------------------------------------
-   > Total cost:          0.00076853 ETH
+   > Total cost:           0.0076853 ETH
 
 
 2_deploy_busd.js
 ================
 
+   Deploying 'BUSD'
+   ----------------
+   > transaction hash:    0x1661b2ea678f33f07be61829faba85043fc0526a36e678cb9e395982a09c1e9d
+   > Blocks: 2            Seconds: 8
+   > contract address:    0x6434d261d6Af93848aE7907026bE83Cfe464daBa
+   > block number:        1241898
+   > block timestamp:     1623904369
+   > account:             0x4D2159FF4c2250AfbB839eeB7DD50A94b2Df1A67
+   > balance:             11.301765450000000001
+   > gas used:            728410 (0xb1d5a)
+   > gas price:           50 gwei
+   > value sent:          0 ETH
+   > total cost:          0.0364205 ETH
+
+
    > Saving migration to chain.
+   > Saving artifacts
    -------------------------------------
-   > Total cost:                   0 ETH
+   > Total cost:           0.0364205 ETH
 
 
 3_deploy_nft.js
@@ -50,23 +66,23 @@ Starting migrations...
 
    Deploying 'LotteryNFT'
    ----------------------
-   > transaction hash:    0xcc7db8df79d7be624905e8508b5adae8ce0df0544ccf18efc06530f7bb37d1e8
-   > Blocks: 3            Seconds: 9
-   > contract address:    0x1e2bAf64F630DC482086Fa12Fe541a43c624074a
-   > block number:        7032602
-   > block timestamp:     1619838121
-   > account:             0xca0272Aaa436E53a6Cc755454812d5A802bBFCE6
-   > balance:             0.28696919
-   > gas used:            2282946 (0x22d5c2)
-   > gas price:           5 gwei
+   > transaction hash:    0x6130f7437f3320871b3d965450e31b86b8515b697f4eca79312a926d0adf2494
+   > Blocks: 1            Seconds: 4
+   > contract address:    0x5fe19B5b4bA33C4420a0733972bD4e9371019b7b
+   > block number:        1241902
+   > block timestamp:     1623904389
+   > account:             0x4D2159FF4c2250AfbB839eeB7DD50A94b2Df1A67
+   > balance:             11.186257800000000001
+   > gas used:            2282898 (0x22d592)
+   > gas price:           50 gwei
    > value sent:          0 ETH
-   > total cost:          0.01141473 ETH
+   > total cost:          0.1141449 ETH
 
 
    > Saving migration to chain.
    > Saving artifacts
    -------------------------------------
-   > Total cost:          0.01141473 ETH
+   > Total cost:           0.1141449 ETH
 
 
 4_deploy_lottery.js
@@ -74,58 +90,72 @@ Starting migrations...
 
    Deploying 'Lottery'
    -------------------
-   > transaction hash:    0xf7242f5d91b56397a4a514537adbbcb56ce54f8f1faa38ab6d960505cce45fbe
-   > Blocks: 3            Seconds: 9
-   > contract address:    0xfCC92421f5f59f1473657584E63bBeaf405cd8D3
-   > block number:        7032611
-   > block timestamp:     1619838148
-   > account:             0xca0272Aaa436E53a6Cc755454812d5A802bBFCE6
-   > balance:             0.270180405
-   > gas used:            3330502 (0x32d1c6)
-   > gas price:           5 gwei
+   > transaction hash:    0xddaee6ddff22f28e018b6aa91cc5b886b74a172c3e63d22f1ccbb40085a10e0f
+   > Blocks: 0            Seconds: 0
+   > contract address:    0xD9f1209a68e787016FE5fB5e092A00ab686CA001
+   > block number:        1241905
+   > block timestamp:     1623904404
+   > account:             0x4D2159FF4c2250AfbB839eeB7DD50A94b2Df1A67
+   > balance:             11.001001150000000001
+   > gas used:            3677878 (0x381eb6)
+   > gas price:           50 gwei
    > value sent:          0 ETH
-   > total cost:          0.01665251 ETH
+   > total cost:          0.1838939 ETH
 
 
    > Saving migration to chain.
    > Saving artifacts
    -------------------------------------
-   > Total cost:          0.01665251 ETH
+   > Total cost:           0.1838939 ETH
+   
+➜  lottery-token-busd git:(bkc-testnet) ✗ truffle deploy -f 5 --to 5 --network bitkubTestnet
+
+Compiling your contracts...
+===========================
+> Everything is up to date, there is nothing to compile.
+
+
+
+Starting migrations...
+======================
+> Network name:    'bitkubTestnet'
+> Network id:      25925
+> Block gas limit: 300000000 (0x11e1a300)
 
 
 5_deploy_proxy.js
 =================
-BUSD.address 0xe9e7cea3dedca5984780bafc599bd69add087d56
-LotteryNFT.address 0x1e2bAf64F630DC482086Fa12Fe541a43c624074a
-Lottery.address 0xfCC92421f5f59f1473657584E63bBeaf405cd8D3
-proxyAdmin 0xca0272Aaa436E53a6Cc755454812d5A802bBFCE6
-lotteryOwner 0xca1cca8f5637c9566d8C719C899440A88AF7D874
-lotteryAdmin 0xca1cca8f5637c9566d8C719C899440A88AF7D874
+BUSD.address 0x6434d261d6Af93848aE7907026bE83Cfe464daBa
+LotteryNFT.address 0x5fe19B5b4bA33C4420a0733972bD4e9371019b7b
+Lottery.address 0xD9f1209a68e787016FE5fB5e092A00ab686CA001
+proxyAdmin 0x4D2159FF4c2250AfbB839eeB7DD50A94b2Df1A67
+lotteryOwner 0x4d246458828978FF2F4288DA07d08B3DCBbbE0Fa
+lotteryAdmin 0x4d246458828978FF2F4288DA07d08B3DCBbbE0Fa
 minPrice 1000000000000000000
-abiEncodeData 0x11e42065000000000000000000000000e9e7cea3dedca5984780bafc599bd69add087d560000000000000000000000001e2baf64f630dc482086fa12fe541a43c624074a0000000000000000000000000000000000000000000000000de0b6b3a7640000000000000000000000000000000000000000000000000000000000000000000d000000000000000000000000ca1cca8f5637c9566d8c719c899440a88af7d874000000000000000000000000ca1cca8f5637c9566d8c719c899440a88af7d874
+abiEncodeData 0x11e420650000000000000000000000006434d261d6af93848ae7907026be83cfe464daba0000000000000000000000005fe19b5b4ba33c4420a0733972bd4e9371019b7b0000000000000000000000000000000000000000000000000de0b6b3a7640000000000000000000000000000000000000000000000000000000000000000000d0000000000000000000000004d246458828978ff2f4288da07d08b3dcbbbe0fa0000000000000000000000004d246458828978ff2f4288da07d08b3dcbbbe0fa
 
    Deploying 'LotteryUpgradeProxy'
    -------------------------------
-   > transaction hash:    0x83d86d2e36069ab5edb1990c3db039caf746aa705e84f3319f1785cdeedf3697
-   > Blocks: 5            Seconds: 13
-   > contract address:    0x9236020Ea390A8822d8E55d563CB8A7E2B730e60
-   > block number:        7032622
-   > block timestamp:     1619838181
-   > account:             0xca0272Aaa436E53a6Cc755454812d5A802bBFCE6
-   > balance:             0.26656507
-   > gas used:            695812 (0xa9e04)
-   > gas price:           5 gwei
+   > transaction hash:    0x15fca64a0df5fcacb23c65c841be1f0efec5a7ffcd4125cef1cf4a0daa3c86fa
+   > Blocks: 1            Seconds: 4
+   > contract address:    0x05B2a2D2323cFA0CbBFADd79dEe6005240FE9d3a
+   > block number:        1241950
+   > block timestamp:     1623904629
+   > account:             0x4D2159FF4c2250AfbB839eeB7DD50A94b2Df1A67
+   > balance:             10.930058400000000001
+   > gas used:            695800 (0xa9df8)
+   > gas price:           50 gwei
    > value sent:          0 ETH
-   > total cost:          0.00347906 ETH
+   > total cost:          0.03479 ETH
 
 
    > Saving migration to chain.
    > Saving artifacts
    -------------------------------------
-   > Total cost:          0.00347906 ETH
+   > Total cost:             0.03479 ETH
 
 
 Summary
 =======
-> Total deployments:   4
-> Final cost:          0.03231483 ETH
+> Total deployments:   1
+> Final cost:          0.03479 ETH

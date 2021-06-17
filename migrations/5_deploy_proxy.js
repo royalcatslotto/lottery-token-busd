@@ -1,8 +1,8 @@
 const LotteryNFT = artifacts.require('LotteryNFT');
-//const BUSD = artifacts.require('BUSD'); // BUSD Testnet
-const BUSD = {
-  address: "0xe9e7cea3dedca5984780bafc599bd69add087d56"
-} // BUSD Mainnet
+const BUSD = artifacts.require('BUSD'); // BUSD Testnet
+// const BUSD = {
+//   address: "0xe9e7cea3dedca5984780bafc599bd69add087d56"
+// } // BUSD Mainnet
 
 const Lottery = artifacts.require('Lottery');
 const LotteryUpgradeProxy = artifacts.require('LotteryUpgradeProxy');
@@ -67,7 +67,7 @@ module.exports = async function (deployer, network, addresses) {
 
   console.log('abiEncodeData', abiEncodeData);
 
-  await deployer.deploy(LotteryUpgradeProxy, Lottery.address, proxyAdmin, abiEncodeData, { from: admin, gas: '3000000' });
+  await deployer.deploy(LotteryUpgradeProxy, Lottery.address, proxyAdmin, abiEncodeData, { from: admin, gas: '5000000' });
   const lotteryNft = await LotteryNFT.deployed();
   await lotteryNft.transferOwnership(LotteryUpgradeProxy.address);
 };
